@@ -27,5 +27,17 @@ def isValidSubsequence(array, sequence):
     return sub_index == len(sequence)
 
 
-print(isValidSubsequence([5, 1, 22, 25, 6, -1, 8, 10], [1, 6, -1, 10]))
+def isValidSubsequence2(array, sequence):
+    arr_i = 0
+    seq_i = 0
+    
+    while arr_i < len(array) and seq_i < len(sequence):
+        if array[arr_i] == sequence[seq_i]:
+            seq_i +=1
+        arr_i += 1
+    
+    return seq_i == len(sequence)
+
+
+print(isValidSubsequence2([5, 1, 22, 25, 6, -1, 8, 10], [1, 6, -1, 10]))
 #print(twoNumberSum([3, 5, -4, 8, 11, 1, -1, 6], 10))
