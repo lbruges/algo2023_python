@@ -39,5 +39,27 @@ def isValidSubsequence2(array, sequence):
     return seq_i == len(sequence)
 
 
-print(isValidSubsequence2([5, 1, 22, 25, 6, -1, 8, 10], [1, 6, -1, 10]))
+def sortedSquaredArray(array):
+    # Time: n * log(n)
+    squares = sorted(map(lambda x: x**2, array))
+    return squares
+
+def sortedSquaredArray2(array):
+    # ascending order - linear time O(n)
+    res = [0 for _ in array]
+    start = 0
+    end = len(array) - 1
+
+    for i in reversed(range(len(array))):
+        if abs(array[start]) > abs(array[end]):
+            res[i] = array[start] ** 2
+            start += 1
+        else:
+            res[i] = array[end] ** 2
+            end -= 1
+    
+    return res
+
+print(sortedSquaredArray2([1, 2, 3, 5, 6, 8, 9]))
+#print(isValidSubsequence2([5, 1, 22, 25, 6, -1, 8, 10], [1, 6, -1, 10]))
 #print(twoNumberSum([3, 5, -4, 8, 11, 1, -1, 6], 10))
