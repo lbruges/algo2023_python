@@ -60,6 +60,38 @@ def sortedSquaredArray2(array):
     
     return res
 
-print(sortedSquaredArray2([1, 2, 3, 5, 6, 8, 9]))
+def tournamentWinner(competitions, results):
+    points = dict()
+    winner = competitions[0][0]
+    points[winner] = 0
+
+    for i in range(len(competitions)):
+        res = results[i]
+
+        if res == 0:           
+            round_win = competitions[i][1]
+        else:
+            round_win = competitions[i][0]
+
+        increment_or_add(points, round_win)
+        
+        if points[round_win] > points[winner]:
+            winner = round_win
+    
+    return winner
+
+def increment_or_add(points, comp):
+    if comp in points:
+        points[comp] += 3
+    else:
+        points[comp] = 3
+
+print(tournamentWinner([
+  ["HTML", "C#"],
+  ["C#", "Python"],
+  ["Python", "HTML"],
+], [0, 0, 1]))
+
+#print(sortedSquaredArray2([1, 2, 3, 5, 6, 8, 9]))
 #print(isValidSubsequence2([5, 1, 22, 25, 6, -1, 8, 10], [1, 6, -1, 10]))
 #print(twoNumberSum([3, 5, -4, 8, 11, 1, -1, 6], 10))
