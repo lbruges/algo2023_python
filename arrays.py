@@ -1,3 +1,4 @@
+# Problem 1 - Two Number Sum
 def twoNumberSum(array, targetSum):
     array.sort()
     left = 0
@@ -13,6 +14,7 @@ def twoNumberSum(array, targetSum):
 
     return []
 
+# Problem 2 - Validate Subsequence
 def isValidSubsequence(array, sequence):
     sub_index = 0
     
@@ -38,7 +40,7 @@ def isValidSubsequence2(array, sequence):
     
     return seq_i == len(sequence)
 
-
+# Problem 3 - Sorted Squared Array
 def sortedSquaredArray(array):
     # Time: n * log(n)
     squares = sorted(map(lambda x: x**2, array))
@@ -60,6 +62,7 @@ def sortedSquaredArray2(array):
     
     return res
 
+# Problem 4 - Tournament Winner
 def tournamentWinner(competitions, results):
     points = dict()
     winner = competitions[0][0]
@@ -86,11 +89,29 @@ def increment_or_add(points, comp):
     else:
         points[comp] = 3
 
+# Problem 5 - Non-Constructible Change 
+def nonConstructibleChange(coins):
+    # The change for a coin that is greater than the comulative sum + 1 of the available coin amounts cannot be returned
+    coins.sort()
+    change = 0
+
+    for coin in coins:
+        if coin > change + 1:
+            return change + 1
+        change += coin
+        
+    
+    return change + 1
+
+print(nonConstructibleChange([1, 5, 1, 1, 1, 10, 15, 20, 100]))
+
+"""
 print(tournamentWinner([
   ["HTML", "C#"],
   ["C#", "Python"],
   ["Python", "HTML"],
 ], [0, 0, 1]))
+"""
 
 #print(sortedSquaredArray2([1, 2, 3, 5, 6, 8, 9]))
 #print(isValidSubsequence2([5, 1, 22, 25, 6, -1, 8, 10], [1, 6, -1, 10]))

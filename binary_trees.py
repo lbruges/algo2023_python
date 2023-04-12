@@ -1,4 +1,5 @@
 # This is the class of the input root. Do not edit it.
+# Problem 1 - Branch Sums
 class BinaryTree:
     def __init__(self, value):
         self.value = value
@@ -24,3 +25,30 @@ def sum_tree(node, run_sum, sums):
     
     sum_tree(node.left, run_sum, sums)
     sum_tree(node.right, run_sum, sums)
+
+
+# Problem 2 - Node Depths
+def nodeDepths_recursive(root):
+    # Write your code here.
+    depth = calculate_depth(root, 0)
+    return depth
+
+def calculate_depth(node, depth):
+    if not node:
+        return 0
+    return depth + calculate_depth(node.left, depth + 1) + calculate_depth(node.right, depth + 1)
+
+
+def nodeDepths_stack(root):
+    total_depth = 0
+    nodes = [(root, 0)]
+
+    while nodes:
+        node, depth = nodes.pop() 
+        if not node:
+            continue
+        total_depth += depth
+        nodes.append((node.left, depth + 1))
+        nodes.append((node.right, depth + 1))
+
+    return total_depth
