@@ -85,4 +85,48 @@ def get_smallest(strings):
     return smallest
 
 
-print(commonCharacters2(["ab&cdef!", "f!ed&cba", "a&bce!d", "ae&fb!cd", "efa&!dbc", "eff!&fff&fffffffbcda", "eeee!efff&fffbbbbbaaaaaccccdddd", "*******!***&****abdcef************", "*******!***&****a***********f*", "*******!***&****b***********c*"]))
+#print(commonCharacters2(["ab&cdef!", "f!ed&cba", "a&bce!d", "ae&fb!cd", "efa&!dbc", "eff!&fff&fffffffbcda", "eeee!efff&fffbbbbbaaaaaccccdddd", "*******!***&****abdcef************", "*******!***&****a***********f*", "*******!***&****b***********c*"]))
+
+# Problem 4 - Run Length Encoding
+
+def runLengthEncoding(string):
+    c = string[0]
+    res = []
+    local_c = 0
+    
+    for i in range(len(string)):
+        curr = string[i]
+        if curr=="=":
+            print("lel")
+        if c == curr:
+            local_c += 1
+            if local_c == 9:
+                res.append(f'9{c}')
+                local_c = 0
+        else:
+            if local_c > 0:
+                res.append(f'{local_c}{c}')
+            c = curr
+            local_c = 1
+
+    res.append(f'{local_c}{c}')
+
+    return "".join(res)
+
+def runLengthEncoding_refactor(string):
+    prev = None
+    res = []
+    local_c = 0
+    
+    for curr in string:
+        if prev and (prev != curr or local_c == 9):
+            res.append(f'{local_c}{prev}')
+            local_c = 0
+            
+        prev = curr
+        local_c += 1
+
+    res.append(f'{local_c}{prev}')
+    return "".join(res)
+
+print(runLengthEncoding_refactor("........______=========AAAA   AAABBBB   BBB"))
