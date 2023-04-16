@@ -1,10 +1,10 @@
 # This is the class of the input root. Do not edit it.
 # Problem 1 - Branch Sums
 class BinaryTree:
-    def __init__(self, value):
+    def __init__(self, value, left=None, right=None):
         self.value = value
-        self.left = None
-        self.right = None
+        self.left = left
+        self.right = right
 
 
 def branchSums(root):
@@ -52,3 +52,21 @@ def nodeDepths_stack(root):
         nodes.append((node.right, depth + 1))
 
     return total_depth
+
+# Problem 3 - Evaluate Expression Tree
+# Time: O(n), Space: O(h), h being the height
+def evaluateExpressionTree(tree):
+    if tree.value >= 0:
+        return tree.value
+
+    left = evaluateExpressionTree(tree.left)
+    right = evaluateExpressionTree(tree.right)
+
+    if tree.value == -1:
+        return left + right
+    if tree.value == -2:
+        return left - right
+    if tree.value == -3:
+        return int(left / right)
+    if tree.value == -4:
+        return left * right
