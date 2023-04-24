@@ -129,4 +129,76 @@ def runLengthEncoding_refactor(string):
     res.append(f'{local_c}{prev}')
     return "".join(res)
 
-print(runLengthEncoding_refactor("........______=========AAAA   AAABBBB   BBB"))
+#print(runLengthEncoding_refactor("........______=========AAAA   AAABBBB   BBB"))
+
+# Problem 5 - First Non-repeating Character
+# O(n) time, O(1) space - no more than 27 letters - constant
+def firstNonRepeatingCharacter(string):
+    mem = dict()
+    for char in string:
+        if char in mem:
+            mem[char] += 1
+        else:
+            mem[char] = 1
+
+    for i in range(len(string)):
+        char = string[i]
+        if mem[char] == 1:
+            return i
+    
+    return -1
+
+# Get method - supports default value
+def firstNonRepeatingCharacter2(string):
+    mem = dict()
+    
+    for char in string:
+        mem[char] = mem.get(char, 0) + 1
+        
+    for i in range(len(string)):
+        char = string[i]
+        if mem[char] == 1:
+            return i
+    
+    return -1
+
+#print(firstNonRepeatingCharacter2("abcdcaf"))
+
+# Problem 6 - Semordnilap
+# Time: O(n*m) , Space: O(n*m) where n is the number of words and m is the length of the longest word.
+def semordnilap(words):
+    w_set = set(words)
+    res = []
+
+    for word in words:
+        reversed_s = reverse_str(word)
+        if reversed_s != word and reversed_s in w_set:
+            res.append([word, reversed_s])
+            w_set.remove(word)
+            w_set.remove(reversed_s)
+    
+    return res
+
+def reverse_str(string):
+    chars = []
+
+    for i in reversed(range(len(string))):
+        chars.append(string[i])
+
+    return "".join(chars) 
+
+# Using list slicing to revert string
+def semordnilap2(words):
+    w_set = set(words)
+    res = []
+
+    for word in words:
+        reversed_s = word[::-1]
+        if reversed_s != word and reversed_s in w_set:
+            res.append([word, reversed_s])
+            w_set.remove(word)
+            w_set.remove(reversed_s)
+    
+    return res
+
+#print(semordnilap2(["dog", "hello", "god", "olleh", "non"]))
