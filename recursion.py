@@ -49,4 +49,23 @@ def getNthFib_alt2(n):
     return a
 
 
-print(getNthFib_alt2(6))
+#print(getNthFib_alt2(6))
+
+# Problem 2 - Product Sum
+# Tip: You can use the type(element) function to check whether an item
+# is a list or an integer.
+def productSum(array):
+    return sumAll_pythonic(array)
+
+def sumAll(arr, depth=1, sum=0):
+    for el in arr:
+        if type(el) is list:
+            sum += sumAll(el, depth+1)
+        else:
+            sum += el
+    return depth * sum
+
+def sumAll_pythonic(arr, depth=1):
+    return depth * sum(sumAll_pythonic(el, depth+1) if isinstance(el, list) else el for el in arr)
+
+print(productSum([5, 2, [7, -1], 3, [6, [-13, 8], 4]]))
